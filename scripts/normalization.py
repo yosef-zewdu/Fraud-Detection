@@ -5,7 +5,7 @@ import joblib
 from sklearn.preprocessing import LabelEncoder, StandardScaler, MinMaxScaler, OneHotEncoder
 
 
-def encoder(method, dataframe, columns_featured):
+def encoder(method, dataframe, columns_featured,name):
     if method == 'labelEncoder':      
         df_lbl = dataframe.copy()
         for col in columns_featured:
@@ -13,7 +13,7 @@ def encoder(method, dataframe, columns_featured):
             label.fit(list(dataframe[col].values))
             df_lbl[col] = label.transform(df_lbl[col].values)
 
-        joblib.dump(label, 'label_encoder.pkl')
+        joblib.dump(label, '../models/label_encoder_{name}.pkl')
     
         return df_lbl 
     
@@ -35,17 +35,17 @@ def encoder(method, dataframe, columns_featured):
         df_lbl = pd.concat([df_lbl, encoded_df], axis=1)
 
         # Save the fitted encoder
-        joblib.dump(encoder, 'one_hot_encoder.pkl')
+        joblib.dump(encoder, '../models/one_hot_encoder_{name}.pkl')
         
         return df_lbl 
 
-def scaler(method, data, columns_scaler):    
+def scaler(method, data, columns_scaler,name):    
     if method == 'standardScaler':        
         Standard = StandardScaler()
         df_standard = data.copy()
         df_standard[columns_scaler] = Standard.fit_transform(df_standard[columns_scaler])  
 
-        joblib.dump(Standard, 'standard_scaler.pkl')
+        joblib.dump(Standard, '../models/standard_scaler_{name}.pkl')
 
         return df_standard
         
@@ -54,7 +54,7 @@ def scaler(method, data, columns_scaler):
         df_minmax = data.copy()
         df_minmax[columns_scaler] = MinMax.fit_transform(df_minmax[columns_scaler]) 
 
-        joblib.dump(MinMax, 'minmax.pkl')
+        joblib.dump(MinMax, f'../models/minmax_{name}.pkl')
 
         return df_minmax
     
@@ -62,7 +62,7 @@ def scaler(method, data, columns_scaler):
         df_nplog = data.copy()
         df_nplog[columns_scaler] = np.log(df_nplog[columns_scaler])    
         
-        joblib.dump(df_nplog, 'nplog.pkl')    
+        joblib.dump(df_nplog, '../models/nplog_{name}.pkl')    
         return df_nplog
     
     return data
