@@ -2,3 +2,5 @@ scripts/__pycache__
 
 *.pkl
 notebooks/mlruns
+app/__pycache__
+app/dash_app/__pycache__
