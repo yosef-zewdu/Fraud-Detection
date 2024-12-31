@@ -39,3 +39,16 @@ def category_plot(df):
             plt.show()
         else:
             print(f"Column '{column}' has only 1 unique value {df[column].unique()}")
+
+
+def time_series(df,feature):
+    # Plotting the time series data
+    plt.figure(figsize=(10, 5))  # Set figure size
+    plt.plot(df.index, df[feature],  linestyle='-')  
+    plt.title('Time Series Data')  # Title of the plot
+    plt.xlabel('Date')  # X-axis label
+    plt.ylabel(f'{feature}')  # Y-axis label
+    plt.grid(True)  # Add grid
+    plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
+    plt.tight_layout()  # Adjust layout
+    plt.show()  # Display the plot
