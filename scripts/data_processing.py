@@ -340,6 +340,11 @@ def feature_eng(df_fraud):
     '''
         Feature Engineering - hour , day , transactional frequency and transactional velocity
     '''
+
+    # change to date time format
+    df_fraud['purchase_time'] = pd.to_datetime(df_fraud['purchase_time'])
+    df_fraud['signup_time'] = pd.to_datetime(df_fraud['signup_time'])
+
     # Feature: Hour of Day
     df_fraud['hour'] = df_fraud['purchase_time'].dt.hour
 

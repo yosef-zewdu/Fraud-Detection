@@ -13,7 +13,7 @@ def encoder(method, dataframe, columns_featured,name):
             label.fit(list(dataframe[col].values))
             df_lbl[col] = label.transform(df_lbl[col].values)
 
-        joblib.dump(label, '../models/label_encoder_{name}.pkl')
+        joblib.dump(label, f'../models/label_encoder_{name}.pkl')
     
         return df_lbl 
     
@@ -35,7 +35,7 @@ def encoder(method, dataframe, columns_featured,name):
         df_lbl = pd.concat([df_lbl, encoded_df], axis=1)
 
         # Save the fitted encoder
-        joblib.dump(encoder, '../models/one_hot_encoder_{name}.pkl')
+        joblib.dump(encoder, f'../models/one_hot_encoder_{name}.pkl')
         
         return df_lbl 
 
@@ -45,7 +45,7 @@ def scaler(method, data, columns_scaler,name):
         df_standard = data.copy()
         df_standard[columns_scaler] = Standard.fit_transform(df_standard[columns_scaler])  
 
-        joblib.dump(Standard, '../models/standard_scaler_{name}.pkl')
+        joblib.dump(Standard, f'../models/standard_scaler_{name}.pkl')
 
         return df_standard
         
@@ -62,7 +62,7 @@ def scaler(method, data, columns_scaler,name):
         df_nplog = data.copy()
         df_nplog[columns_scaler] = np.log(df_nplog[columns_scaler])    
         
-        joblib.dump(df_nplog, '../models/nplog_{name}.pkl')    
+        joblib.dump(df_nplog, f'../models/nplog_{name}.pkl')    
         return df_nplog
     
     return data
